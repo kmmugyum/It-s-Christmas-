@@ -1,0 +1,204 @@
+.visitor-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    overscroll-behavior: none;
+}
+
+.visitor-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* 트리 + 버튼 컨테이너 (세로 정렬) */
+.tree-and-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    margin-bottom: 60px;
+}
+
+/* Christmas Tree */
+.visitor-tree {
+    width: min(90vw, 500px);
+    height: min(90vw, 500px);
+    transform: rotate(10deg);
+}
+
+.visitor-tree-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+}
+
+/* Button - 트리 아래 20px 간격 */
+.visitor-button {
+    position: relative;
+    height: 65px;
+    border: 4px solid #000;
+    border-radius: 37px;
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.2s ease;
+    margin-top: 20px;
+    /* 트리 아래 간격 조절 */
+}
+
+.write-button {
+    width: 250px;
+}
+
+.visitor-button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.visitor-button:active {
+    transform: scale(0.98);
+}
+
+.visitor-button-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 33px;
+    z-index: 0;
+}
+
+.visitor-button-text {
+    position: relative;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 22px;
+    color: #000;
+    z-index: 1;
+}
+
+/* 배치 모드 배너 */
+.placement-mode-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #c00, #ff4444);
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    z-index: 100;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.placement-mode-banner p {
+    margin: 0;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 22px;
+}
+
+.cancel-placement-btn {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancel-placement-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* 배치 모드 트리 */
+.visitor-tree.placement-mode {
+    cursor: crosshair;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+    }
+
+    50% {
+        filter: drop-shadow(0 10px 40px rgba(255, 100, 100, 0.5));
+    }
+}
+
+/* 배치된 아이콘 */
+.placed-icon {
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    pointer-events: none;
+    animation: iconAppear 0.4s ease-out;
+}
+
+@keyframes iconAppear {
+    from {
+        transform: translate(-50%, -50%) rotate(-10deg) scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(-10deg) scale(1);
+        opacity: 1;
+    }
+}
+
+.placed-icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* 배치 커서 (미리보기) */
+.placement-cursor {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    pointer-events: none;
+    opacity: 0.7;
+    z-index: 1000;
+}
+
+.cursor-icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

@@ -1,0 +1,91 @@
+.home-tree-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    overscroll-behavior: none;
+}
+
+.home-tree-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* 트리 + 버튼 컨테이너 (세로 정렬) */
+.tree-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    margin-bottom: 60px;
+}
+
+/* Main Christmas Tree */
+.main-tree {
+    width: min(90vw, 500px);
+    height: min(90vw, 500px);
+    transform: rotate(10deg);
+}
+
+.main-tree-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+}
+
+/* Share Button - 트리 아래 20px 간격 */
+.share-button {
+    position: relative;
+    width: 200px;
+    height: 70px;
+    border: 4px solid #000;
+    border-radius: 37px;
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.2s ease;
+    margin-top: 20px;
+    /* 트리 아래 간격 조절 */
+}
+
+.share-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.share-button:active {
+    transform: scale(0.98);
+}
+
+.share-button-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 33px;
+    z-index: 0;
+}
+
+.share-button-text {
+    position: relative;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 24px;
+    color: #000;
+    z-index: 1;
+}

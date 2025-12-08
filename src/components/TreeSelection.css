@@ -1,0 +1,212 @@
+.tree-selection-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.selection-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* Preview Tree - Top Left */
+.preview-tree {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    width: 260px;
+    height: 260px;
+    z-index: 5;
+    transform: rotate(10deg);
+}
+
+.preview-tree-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Section Labels */
+.section-label {
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+    text-align: center;
+}
+
+/* Background Options Grid - 1x2 */
+.background-options {
+    position: absolute;
+    bottom: 560px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.background-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.background-option {
+    width: min(38vw, 150px);
+    height: min(25vw, 90px);
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 3px solid transparent;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.background-option:hover {
+    transform: scale(1.05);
+}
+
+.background-option.selected {
+    border-color: #c41e3a;
+    box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.3);
+}
+
+.background-option-image {
+    width: 100%;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+}
+
+.background-option-name {
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 14px;
+    color: #333;
+    margin-top: 4px;
+}
+
+/* Tree Options Grid - 2x2 */
+.tree-options {
+    position: absolute;
+    bottom: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tree-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.tree-option {
+    width: min(38vw, 150px);
+    height: min(38vw, 160px);
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 3px solid transparent;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tree-option:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.tree-option.selected {
+    border-color: #c41e3a;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 6px rgba(196, 30, 58, 0.3), 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.tree-option-image {
+    width: min(28vw, 100px);
+    height: min(28vw, 100px);
+    object-fit: contain;
+}
+
+.tree-option-name {
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: clamp(16px, 4vw, 20px);
+    color: #333;
+    margin-top: 8px;
+}
+
+/* Complete Button */
+.complete-button {
+    position: absolute;
+    bottom: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 70px;
+    border: 4px solid #000;
+    border-radius: 37px;
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.complete-button.active:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.complete-button.active:active {
+    transform: translateX(-50%) scale(0.98);
+}
+
+.complete-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 33px;
+    z-index: 0;
+}
+
+.button-label {
+    position: relative;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 24px;
+    color: #000;
+    z-index: 1;
+}

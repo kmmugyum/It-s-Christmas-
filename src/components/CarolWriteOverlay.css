@@ -1,0 +1,259 @@
+.carol-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.carol-modal {
+    position: relative;
+    width: 300px;
+    max-height: 80vh;
+    border-radius: 46px;
+    border: 1px solid #000;
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.carol-modal-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 46px;
+    z-index: 0;
+}
+
+.carol-modal-content {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 25px;
+    z-index: 1;
+}
+
+.carol-close-button {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 40px;
+    color: #000;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.carol-close-button:hover {
+    transform: scale(1.1);
+    opacity: 0.7;
+}
+
+.carol-title {
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 26px;
+    color: #000;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.carol-input-group {
+    margin-bottom: 16px;
+}
+
+.carol-label {
+    display: block;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.carol-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 18px;
+    color: #000;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.carol-input:focus {
+    border-color: #1a472a;
+}
+
+.carol-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 18px;
+    color: #000;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    outline: none;
+    resize: none;
+    transition: border-color 0.2s;
+}
+
+.carol-textarea:focus {
+    border-color: #1a472a;
+}
+
+.carol-submit-button {
+    margin-top: 16px;
+    padding: 14px 24px;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 24px;
+    background: linear-gradient(135deg, #1a472a, #2d5a3f);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.carol-submit-button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(26, 71, 42, 0.4);
+}
+
+.carol-submit-button:active {
+    transform: scale(0.98);
+}
+
+/* YouTube Preview Section */
+.youtube-preview-section {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    margin-top: 8px;
+}
+
+/* 좌측: 썸네일 */
+.youtube-thumbnail {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    border: 2px solid #000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.thumbnail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-skeleton {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.thumbnail-placeholder {
+    font-size: 36px;
+}
+
+.thumbnail-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 16px;
+    color: #666;
+}
+
+/* 우측: 제목 + 입력 */
+.youtube-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80px;
+}
+
+.youtube-title {
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 20px;
+    color: #000;
+    padding-left: 12px;
+}
+
+.title-placeholder {
+    color: #999;
+}
+
+.title-skeleton {
+    height: 20px;
+    width: 80%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.youtube-input {
+    border: 2px solid #c00 !important;
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 16px;
+}
