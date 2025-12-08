@@ -23,11 +23,13 @@
 
 ## 🛠️ 기술 스택
 
-- **Frontend**: React 18, TypeScript
-- **Build Tool**: Vite 6
-- **Styling**: Vanilla CSS (반응형)
-- **Routing**: React Router DOM
-- **Font**: Nanum Pen Script (Google Fonts)
+| 분류 | 기술 |
+|------|------|
+| 프론트엔드 | React 18, TypeScript |
+| 빌드 도구 | Vite 6 |
+| 스타일링 | Vanilla CSS (반응형) |
+| 라우팅 | React Router DOM |
+| 폰트 | 나눔펜스크립트 (Google Fonts) |
 
 ## 📁 프로젝트 구조
 
@@ -36,19 +38,19 @@ src/
 ├── assets/           # 이미지, 아이콘 에셋
 │   └── icons/        # 24개 크리스마스 아이콘 (PNG)
 ├── components/       # UI 컴포넌트
-│   ├── Modal.tsx
-│   ├── Home.tsx
-│   ├── TreeSelection.tsx
-│   ├── HomeWithTree.tsx
-│   ├── ShareOverlay.tsx
-│   ├── VisitorPage.tsx
-│   ├── CarolWriteOverlay.tsx
-│   ├── IconSelectModal.tsx
-│   └── CreateTreePromptModal.tsx
+│   ├── Modal.tsx              # 시작 모달
+│   ├── Home.tsx               # 홈 화면
+│   ├── TreeSelection.tsx      # 트리/배경 선택
+│   ├── HomeWithTree.tsx       # 트리 메인 화면
+│   ├── ShareOverlay.tsx       # 공유 모달
+│   ├── VisitorPage.tsx        # 방문자 페이지
+│   ├── CarolWriteOverlay.tsx  # 음악/편지 작성
+│   ├── IconSelectModal.tsx    # 아이콘 선택
+│   └── CreateTreePromptModal.tsx  # 트리 생성 안내
 ├── pages/            # 페이지 라우팅
-│   ├── AdminFlow.tsx
-│   └── VisitorFlow.tsx
-├── types.ts          # TypeScript 타입 정의
+│   ├── AdminFlow.tsx          # 관리자 플로우
+│   └── VisitorFlow.tsx        # 방문자 플로우
+├── types.ts          # 타입 정의
 └── App.tsx           # 메인 앱 및 라우팅
 ```
 
@@ -57,46 +59,59 @@ src/
 ### 설치
 
 ```bash
+# 저장소 클론
+git clone https://github.com/kmmugyum/It-s-Christmas-.git
+cd It-s-Christmas-
+
 # 의존성 설치
 npm install
 
 # 개발 서버 실행
 npm run dev
 
-# 빌드
+# 프로덕션 빌드
 npm run build
 ```
 
 ### 실행
 
-개발 서버: `http://localhost:5173`
+개발 서버 주소: `http://localhost:5173`
 
-- **관리자 페이지**: `/` 또는 `/admin`
-- **방문자 페이지**: `/tree/:treeId`
+| 페이지 | URL |
+|--------|-----|
+| 관리자 페이지 | `/` 또는 `/admin` |
+| 방문자 페이지 | `/tree/:treeId` |
 
 ## 🎨 화면 흐름
 
+### 관리자 플로우
 ```
-[관리자]
-모달 → 홈 → 트리/배경 선택 → 트리 화면 → 공유
+시작 모달 → 홈 화면 → 트리/배경 선택 → 트리 메인 화면 → 공유
+```
 
-[방문자]
-트리 페이지 → 음악 추천 & 편지 작성 → 아이콘 선택 → 트리에 배치
-→ "나도 트리 만들기" 안내 모달
+### 방문자 플로우
+```
+트리 페이지 → 음악 추천 & 편지 작성 → 아이콘 선택 
+→ 트리에 아이콘 배치 → "나도 트리 만들기" 안내
 ```
 
 ## 📱 반응형 디자인
 
 - 모바일 우선 설계
-- 화면 흔들림 방지 (터치 최적화)
+- 터치 최적화 (화면 흔들림 방지)
 - 다양한 화면 크기 대응
 
 ## 🔮 추후 구현 예정
 
 - [ ] 백엔드 API 연동 (Firebase)
-- [ ] 유튜브 미리보기 실제 데이터
+- [ ] 유튜브 미리보기 실제 데이터 연동
 - [ ] 관리자 편지/음악 확인 기능
 - [ ] 다양한 트리/배경 에셋 추가
+- [ ] 데이터베이스 저장
+
+## 👨‍💻 개발자
+
+- **GitHub**: [@kmmugyum](https://github.com/kmmugyum)
 
 ## 📄 라이선스
 
