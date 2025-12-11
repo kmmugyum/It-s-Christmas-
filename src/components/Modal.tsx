@@ -12,7 +12,7 @@ interface ModalProps {
 export function Modal({ isOpen, onConfirm, message }: ModalProps) {
     if (!isOpen) return null;
 
-    const defaultMessage = "친구에게\n크리스마스 캐롤을\n보내보세요!";
+    const defaultMessage = "친구에게\n크리스마스 캐롤과 메시지로\n마음을 전해보세요!";
 
     return (
         <div className="modal-overlay" onClick={onConfirm}>

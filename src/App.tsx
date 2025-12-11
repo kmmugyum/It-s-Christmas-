@@ -27,9 +27,11 @@ function App() {
 
   return (
     <Routes>
-      {/* 관리자 페이지: /admin */}
+      {/* 관리자 페이지: 새 트리 생성 */}
       <Route path="/" element={<AdminFlow />} />
-      <Route path="/admin/*" element={<AdminFlow />} />
+
+      {/* 관리자 페이지: 기존 트리 관리 (secretKey 포함) */}
+      <Route path="/admin/:treeId/:secretKey" element={<AdminFlow />} />
 
       {/* 방문자 페이지: /tree/:treeId */}
       <Route path="/tree/:treeId" element={<VisitorFlow />} />

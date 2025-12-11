@@ -12,12 +12,12 @@
 
 .visitor-background {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
     z-index: 0;
 }
 
@@ -32,9 +32,9 @@
 
 /* Christmas Tree */
 .visitor-tree {
+    position: relative;
     width: min(90vw, 500px);
     height: min(90vw, 500px);
-    transform: rotate(10deg);
 }
 
 .visitor-tree-image {
@@ -163,19 +163,19 @@
 /* 배치된 아이콘 */
 .placed-icon {
     position: absolute;
-    transform: translate(-50%, -50%) rotate(-10deg);
+    transform: translate(-50%, -50%);
     pointer-events: none;
     animation: iconAppear 0.4s ease-out;
 }
 
 @keyframes iconAppear {
     from {
-        transform: translate(-50%, -50%) rotate(-10deg) scale(0);
+        transform: translate(-50%, -50%) scale(0);
         opacity: 0;
     }
 
     to {
-        transform: translate(-50%, -50%) rotate(-10deg) scale(1);
+        transform: translate(-50%, -50%) scale(1);
         opacity: 1;
     }
 }

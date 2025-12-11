@@ -1,5 +1,5 @@
 import './Home.css';
-import background from '../assets/background.png';
+import background from '../assets/backgrounds/background.png';
 import buttonBackground from '../assets/modal_background.png';
 
 interface HomeProps {

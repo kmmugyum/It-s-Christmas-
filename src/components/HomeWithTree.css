@@ -1,7 +1,11 @@
 .home-tree-container {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -12,13 +16,31 @@
 
 .home-tree-background {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
     z-index: 0;
+}
+
+/* 상단 안내 문구 */
+.admin-top-notice {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 20px;
+    color: #333;
+    z-index: 50;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    white-space: nowrap;
 }
 
 /* 트리 + 버튼 컨테이너 (세로 정렬) */
@@ -32,9 +54,10 @@
 
 /* Main Christmas Tree */
 .main-tree {
+    position: relative;
     width: min(90vw, 500px);
     height: min(90vw, 500px);
-    transform: rotate(10deg);
+
 }
 
 .main-tree-image {
@@ -42,6 +65,29 @@
     height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+}
+
+/* 배치된 아이콘 (관리자 페이지용) */
+.home-tree-container .placed-icon {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 5;
+    pointer-events: auto;
+}
+
+.home-tree-container .placed-icon:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    z-index: 10;
+}
+
+.home-tree-container .placed-icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    pointer-events: none;
 }
 
 /* Share Button - 트리 아래 20px 간격 */

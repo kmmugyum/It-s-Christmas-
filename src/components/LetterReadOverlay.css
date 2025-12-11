@@ -1,4 +1,4 @@
-.carol-overlay {
+.letter-overlay {
     position: fixed;
     inset: 0;
     background-color: rgba(255, 255, 255, 0.5);
@@ -6,10 +6,10 @@
     align-items: center;
     justify-content: center;
     z-index: 100;
-    animation: fadeIn 0.3s ease-out;
+    animation: letterFadeIn 0.3s ease-out;
 }
 
-@keyframes fadeIn {
+@keyframes letterFadeIn {
     from {
         opacity: 0;
     }
@@ -19,17 +19,17 @@
     }
 }
 
-.carol-modal {
+.letter-modal {
     position: relative;
     width: 300px;
     max-height: 80vh;
     border-radius: 46px;
     border: 1px solid #000;
     overflow: hidden;
-    animation: slideUp 0.3s ease-out;
+    animation: letterSlideUp 0.3s ease-out;
 }
 
-@keyframes slideUp {
+@keyframes letterSlideUp {
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -41,7 +41,7 @@
     }
 }
 
-.carol-modal-bg {
+.letter-modal-bg {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -51,7 +51,7 @@
     z-index: 0;
 }
 
-.carol-modal-content {
+.letter-modal-content {
     position: relative;
     width: 100%;
     display: flex;
@@ -60,7 +60,7 @@
     z-index: 1;
 }
 
-.carol-close-button {
+.letter-close-button {
     position: absolute;
     top: 16px;
     right: 20px;
@@ -79,25 +79,16 @@
     transition: all 0.2s ease;
 }
 
-.carol-close-button:hover {
+.letter-close-button:hover {
     transform: scale(1.1);
     opacity: 0.7;
 }
 
-.carol-title {
-    font-family: 'Nanum Pen Script', cursive;
-    font-size: 26px;
-    color: #000;
-    text-align: center;
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
-
-.carol-input-group {
+.letter-input-group {
     margin-bottom: 16px;
 }
 
-.carol-label {
+.letter-label {
     display: block;
     font-family: 'Nanum Pen Script', cursive;
     font-size: 20px;
@@ -106,7 +97,8 @@
     margin-bottom: 8px;
 }
 
-.carol-input {
+/* 편지 내용 (읽기 전용) */
+.letter-content {
     width: 100%;
     padding: 12px 16px;
     font-family: 'Nanum Pen Script', cursive;
@@ -115,33 +107,35 @@
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.8);
-    outline: none;
-    transition: border-color 0.2s;
+    min-height: 100px;
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.5;
 }
 
-.carol-input:focus {
-    border-color: #1a472a;
+/* 편지 내용 스크롤바 스타일 */
+.letter-content::-webkit-scrollbar {
+    width: 8px;
 }
 
-.carol-textarea {
-    width: 100%;
-    padding: 12px 16px;
-    font-family: 'Nanum Pen Script', cursive;
-    font-size: 18px;
-    color: #000;
-    border: 2px solid rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.8);
-    outline: none;
-    resize: none;
-    transition: border-color 0.2s;
+.letter-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
 }
 
-.carol-textarea:focus {
-    border-color: #1a472a;
+.letter-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
 }
 
-.carol-submit-button {
+.letter-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* 닫기 버튼 */
+.letter-close-btn {
     margin-top: 16px;
     padding: 14px 24px;
     font-family: 'Nanum Pen Script', cursive;
@@ -154,25 +148,25 @@
     transition: all 0.2s ease;
 }
 
-.carol-submit-button:hover {
+.letter-close-btn:hover {
     transform: scale(1.03);
     box-shadow: 0 4px 12px rgba(26, 71, 42, 0.4);
 }
 
-.carol-submit-button:active {
+.letter-close-btn:active {
     transform: scale(0.98);
 }
 
-/* YouTube Preview Section */
-.youtube-preview-section {
+/* YouTube Preview Section (CarolWriteOverlay.css에서 복사) */
+.letter-overlay .youtube-preview-section {
     display: flex;
     gap: 12px;
     margin-bottom: 20px;
     margin-top: 8px;
+    align-self: center;
 }
 
-/* 좌측: 썸네일 */
-.youtube-thumbnail {
+.letter-overlay .youtube-thumbnail {
     flex-shrink: 0;
     width: 80px;
     height: 80px;
@@ -185,20 +179,20 @@
     background: rgba(255, 255, 255, 0.8);
 }
 
-.thumbnail-image {
+.letter-overlay .thumbnail-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.thumbnail-wrapper {
+.letter-overlay .thumbnail-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
     cursor: pointer;
 }
 
-.thumbnail-play-overlay {
+.letter-overlay .thumbnail-play-overlay {
     position: absolute;
     inset: 0;
     display: flex;
@@ -208,11 +202,11 @@
     transition: background 0.2s ease;
 }
 
-.thumbnail-wrapper:hover .thumbnail-play-overlay {
+.letter-overlay .thumbnail-wrapper:hover .thumbnail-play-overlay {
     background: rgba(0, 0, 0, 0.5);
 }
 
-.play-pause-icon {
+.letter-overlay .play-pause-icon {
     width: 36px;
     height: 36px;
     object-fit: contain;
@@ -220,19 +214,19 @@
     transition: transform 0.2s ease;
 }
 
-.thumbnail-wrapper:hover .play-pause-icon {
+.letter-overlay .thumbnail-wrapper:hover .play-pause-icon {
     transform: scale(1.1);
 }
 
-.thumbnail-skeleton {
+.letter-overlay .thumbnail-skeleton {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
     background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
+    animation: letterShimmer 1.5s infinite;
 }
 
-@keyframes shimmer {
+@keyframes letterShimmer {
     0% {
         background-position: 200% 0;
     }
@@ -242,30 +236,47 @@
     }
 }
 
-.thumbnail-placeholder {
-    font-size: 36px;
-}
-
-.thumbnail-empty {
+.letter-overlay .thumbnail-empty {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: 'Nanum Pen Script', cursive;
-    font-size: 16px;
-    color: #666;
+    font-size: 36px;
 }
 
-/* 우측: 제목 + 입력 */
-.youtube-info {
+.letter-overlay .youtube-info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 8px;
     height: 80px;
 }
 
-.youtube-title {
+.letter-overlay .youtube-link-button {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    gap: 4px;
+    padding: 6px 12px;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(135deg, #c94c4c, #a83232);
+    border: none;
+    border-radius: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: fit-content;
+}
+
+.letter-overlay .youtube-link-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(201, 76, 76, 0.4);
+}
+
+.letter-overlay .youtube-title {
     font-family: 'Nanum Pen Script', cursive;
     font-size: 20px;
     color: #000;
@@ -278,18 +289,17 @@
     line-height: 28px;
 }
 
-.youtube-title span {
+.letter-overlay .youtube-title span {
     display: inline-block;
-    animation: marquee 16s linear infinite;
+    animation: letterMarquee 16s linear infinite;
     animation-delay: 0.3s;
-    /* 처음에 잠시 멈췄다가 시작 */
 }
 
-.youtube-title:hover span {
+.letter-overlay .youtube-title:hover span {
     animation-play-state: paused;
 }
 
-@keyframes marquee {
+@keyframes letterMarquee {
     0% {
         transform: translateX(0%);
     }
@@ -307,24 +317,16 @@
     }
 }
 
-.title-placeholder {
+.letter-overlay .title-placeholder {
     color: #999;
     animation: none;
-    /* placeholder는 스크롤 안 함 */
 }
 
-.title-skeleton {
+.letter-overlay .title-skeleton {
     height: 20px;
     width: 80%;
     border-radius: 10px;
     background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
     background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-}
-
-.youtube-input {
-    border: 2px solid #c00 !important;
-    border-radius: 12px;
-    padding: 8px 12px;
-    font-size: 16px;
+    animation: letterShimmer 1.5s infinite;
 }

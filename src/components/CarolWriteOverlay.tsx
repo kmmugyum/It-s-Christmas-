@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './CarolWriteOverlay.css';
 import modalBackground from '../assets/modal_background.png';
 import { IconSelectModal } from './IconSelectModal';
+import playIcon from '../assets/icons/Play.png';
+import pauseIcon from '../assets/icons/Pause.png';
 
 interface CarolWriteOverlayProps {
     isOpen: boolean;
@@ -21,31 +23,68 @@ export function CarolWriteOverlay({ isOpen, onClose, onIconSelected }: CarolWrit
     const [videoInfo, setVideoInfo] = useState<YouTubeVideoInfo | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isIconModalOpen, setIsIconModalOpen] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false); // false = Pause 아이콘 표시 (일시정지 상태), true = Play 아이콘 표시 (재생 중)
+    const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
 
     if (!isOpen) return null;
 
+    // 유튜브 URL에서 Video ID 추출
+    const extractVideoId = (url: string): string | null => {
+        const patterns = [
+            /(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/,
+            /youtube\.com\/embed\/([\w-]+)/,
+            /youtube\.com\/v\/([\w-]+)/,
+        ];
+        for (const pattern of patterns) {
+            const match = url.match(pattern);
+            if (match) return match[1];
+        }
+        return null;
+    };
+
     // 유튜브 URL 변경 시 처리
-    const handleYoutubeUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleYoutubeUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const url = e.target.value;
         setYoutubeUrl(url);
 
-        // 유튜브 URL 패턴 체크
-        const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]+/;
+        const videoId = extractVideoId(url);
 
-        if (youtubeRegex.test(url)) {
-            // TODO: 백엔드 API 호출하여 실제 정보 가져오기
+        if (videoId) {
             setIsLoading(true);
 
-            // 임시 스켈레톤 표시 (1초 후 가짜 데이터)
-            setTimeout(() => {
+            try {
+                // YouTube oEmbed API로 제목 가져오기 (API 키 불필요)
+                const oEmbedUrl = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`;
+                const response = await fetch(oEmbedUrl);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setVideoInfo({
+                        title: data.title,
+                        thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
+                    });
+                    setCurrentVideoId(videoId);
+                } else {
+                    // API 실패 시 썸네일만이라도 표시
+                    setVideoInfo({
+                        title: '제목을 불러올 수 없습니다',
+                        thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
+                    });
+                }
+            } catch {
+                // 네트워크 에러 시 썸네일만 표시
                 setVideoInfo({
-                    title: '노래 제목이 여기에 표시됩니다',
-                    thumbnail: '' // 실제 썸네일 URL (백엔드에서 가져올 예정)
+                    title: '제목을 불러올 수 없습니다',
+                    thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
                 });
+            } finally {
                 setIsLoading(false);
-            }, 1000);
+            }
         } else {
             setVideoInfo(null);
+            setCurrentVideoId(null);
+            setIsPlaying(false);
         }
     };
 
@@ -64,6 +103,23 @@ export function CarolWriteOverlay({ isOpen, onClose, onIconSelected }: CarolWrit
         setYoutubeUrl('');
         setLetter('');
         setVideoInfo(null);
+        setCurrentVideoId(null);
+        setIsPlaying(false);
+    };
+
+    // 재생/일시정지 토글
+    const handlePlayPause = () => {
+        const newIsPlaying = !isPlaying;
+        setIsPlaying(newIsPlaying);
+
+        // YouTube iframe 제어
+        if (iframeRef.current && iframeRef.current.contentWindow) {
+            const command = newIsPlaying ? 'playVideo' : 'pauseVideo';
+            iframeRef.current.contentWindow.postMessage(
+                JSON.stringify({ event: 'command', func: command }),
+                '*'
+            );
+        }
     };
 
     return (
@@ -95,7 +151,16 @@ export function CarolWriteOverlay({ isOpen, onClose, onIconSelected }: CarolWrit
                                     <div className="thumbnail-skeleton" />
                                 ) : videoInfo ? (
                                     videoInfo.thumbnail ? (
-                                        <img src={videoInfo.thumbnail} alt="썸네일" className="thumbnail-image" />
+                                        <div className="thumbnail-wrapper" onClick={handlePlayPause}>
+                                            <img src={videoInfo.thumbnail} alt="썸네일" className="thumbnail-image" />
+                                            <div className="thumbnail-play-overlay">
+                                                <img
+                                                    src={isPlaying ? playIcon : pauseIcon}
+                                                    alt={isPlaying ? 'Playing' : 'Paused'}
+                                                    className="play-pause-icon"
+                                                />
+                                            </div>
+                                        </div>
                                     ) : (
                                         <div className="thumbnail-placeholder">
                                             <span>🎵</span>
@@ -116,7 +181,9 @@ export function CarolWriteOverlay({ isOpen, onClose, onIconSelected }: CarolWrit
                                     {isLoading ? (
                                         <div className="title-skeleton" />
                                     ) : videoInfo ? (
-                                        <span>{videoInfo.title}</span>
+                                        <span style={{ animationPlayState: isPlaying ? 'running' : 'paused' }}>
+                                            {videoInfo.title}
+                                        </span>
                                     ) : (
                                         <span className="title-placeholder">제목</span>
                                     )}
@@ -159,6 +226,24 @@ export function CarolWriteOverlay({ isOpen, onClose, onIconSelected }: CarolWrit
                 onClose={() => setIsIconModalOpen(false)}
                 onSelectIcon={handleIconSelect}
             />
+
+            {/* 숨겨진 YouTube iframe (오디오 재생용) */}
+            {currentVideoId && (
+                <iframe
+                    ref={iframeRef}
+                    src={`https://www.youtube.com/embed/${currentVideoId}?enablejsapi=1&loop=1&playlist=${currentVideoId}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    style={{
+                        position: 'absolute',
+                        width: 0,
+                        height: 0,
+                        border: 'none',
+                        opacity: 0,
+                        pointerEvents: 'none'
+                    }}
+                    title="YouTube Audio Player"
+                />
+            )}
         </>
     );
 }
